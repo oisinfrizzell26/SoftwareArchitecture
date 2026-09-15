@@ -44,4 +44,19 @@ plt.xlabel("Year")
 plt.ylabel("Cumulative EVA duration (hours)")
 plt.tight_layout()
 plt.savefig("cumulative_duration.png")
+
+annual_hours = {}
+for date, duration_hours in records:
+    annual_hours[date.year] = annual_hours.get(date.year, 0) + duration_hours
+
+years = sorted(annual_hours)
+totals = [annual_hours[year] for year in years]
+
+plt.figure()
+plt.bar(years, totals)
+plt.xlabel("Year")
+plt.ylabel("Annual EVA duration (hours)")
+plt.tight_layout()
+plt.savefig("annual_duration.png")
+
 plt.show()
